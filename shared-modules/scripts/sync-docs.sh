@@ -65,8 +65,9 @@ for repo in "${REPOS[@]}"; do
     
     # Copy files
     files_updated=false
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd ../.. && pwd)"
     for file in "${FILES[@]}"; do
-        source_file="$TEMP_DIR/../$file"
+        source_file="$SCRIPT_DIR/$file"
         if [ -f "$source_file" ]; then
             echo "  Copying $file..."
             mkdir -p "$(dirname "$file")"
