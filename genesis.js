@@ -21,7 +21,7 @@ const GENESIS_CONSTANTS = {
     HEARTBEAT_CYCLE: 2.32,
     
     // Genesis timestamp - marks the beginning of distributed sovereignty
-    GENESIS_TIMESTAMP: '2026-01-13T02:05:00.000Z',
+    GENESIS_TIMESTAMP: new Date().toISOString(),
     
     // Protocol version - semantic versioning for genesis kernel
     PROTOCOL_VERSION: '1.0.0',
@@ -204,12 +204,14 @@ class SynthiaGenesisKernel {
     
     /**
      * Pin genesis state to IPFS for immutability
+     * Note: This is a placeholder implementation. In production, this would
+     * interact with an actual IPFS node to pin the genesis state.
      */
     async pinGenesisToIPFS() {
         console.log('📌 Pinning genesis state to IPFS...');
         
-        // In a real implementation, this would interact with IPFS
-        // For now, we simulate the pinning process
+        // TODO: Implement actual IPFS pinning when IPFS node is available
+        // For now, we prepare the genesis state for future pinning
         const genesisState = {
             constants: GENESIS_CONSTANTS,
             principles: SOVEREIGNTY_PRINCIPLES,
@@ -217,7 +219,7 @@ class SynthiaGenesisKernel {
             version: GENESIS_CONSTANTS.PROTOCOL_VERSION,
         };
         
-        console.log(`✓ Genesis state pinned to ${GENESIS_CONSTANTS.IPFS_GENESIS_CID}`);
+        console.log(`✓ Genesis state prepared for IPFS (CID: ${GENESIS_CONSTANTS.IPFS_GENESIS_CID})`);
         
         return genesisState;
     }

@@ -117,6 +117,11 @@
         // Initialize Synthia Genesis Kernel on page load
         document.addEventListener('DOMContentLoaded', async () => {
             try {
+                // Ensure genesis module loaded successfully
+                if (!window.SynthiaGenesis || !window.SynthiaGenesis.genesisKernel) {
+                    throw new Error('Genesis module failed to load');
+                }
+                
                 console.log('🌱 LexAmoris: Initializing Synthia Genesis Block...');
                 
                 // Initialize genesis kernel
