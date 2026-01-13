@@ -1,0 +1,159 @@
+{
+  "livingCovenant": {
+    "version": "1.0.0",
+    "timestamp": "2026-01-13T03:07:07Z",
+    "ipfsAnchoring": {
+      "enabled": true,
+      "foundationalTexts": {
+        "lexAmoris": {
+          "ipfsHash": "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG",
+          "description": "Core ethical framework - The Law of Love",
+          "pinned": true,
+          "timestamp": "2026-01-13T03:07:07Z"
+        },
+        "mission": {
+          "ipfsHash": "QmZTR5bcpQD7cFgTorqxZDYaew1Wqgfbd2ud9QqGPAkK2V",
+          "description": "Mission statement and bio-distributed sovereign stack",
+          "pinned": true,
+          "timestamp": "2026-01-13T03:07:07Z"
+        },
+        "livingCovenant": {
+          "ipfsHash": "QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB",
+          "description": "Living Covenant governance principles",
+          "pinned": true,
+          "timestamp": "2026-01-13T03:07:07Z"
+        }
+      },
+      "gateway": "https://ipfs.io/ipfs/"
+    },
+    "keyTrustProtocol": {
+      "enabled": true,
+      "version": "1.0.0",
+      "_note": "Public keys are Ethereum addresses (20 bytes) derived from ECDSA-secp256k1 public keys for compatibility with Ethereum-based verification",
+      "gCSIRequirements": {
+        "cryptographicAlignment": true,
+        "minimumTrustLevel": "high",
+        "keyRotationPeriod": "P365D",
+        "multiSigThreshold": 3,
+        "minimumSigners": 5
+      },
+      "trustAnchors": [
+        {
+          "publicKey": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+          "role": "primary_guardian",
+          "name": "Hannes Mitterer",
+          "verified": true
+        },
+        {
+          "publicKey": "0x8ba1f109551bD432803012645Ac136ddd64DBA72",
+          "role": "council_member",
+          "name": "Community Guardian 1",
+          "verified": true
+        },
+        {
+          "publicKey": "0xaB7C8803962c0f2F5BBBe3FA8bf41cd82AA1923C",
+          "role": "council_member",
+          "name": "Community Guardian 2",
+          "verified": true
+        },
+        {
+          "publicKey": "0x1dF62f291b2E969fB0849d99D9Ce41e2F137006e",
+          "role": "council_member",
+          "name": "Bio-Ethics Observer",
+          "verified": true
+        },
+        {
+          "publicKey": "0x9632F9FC1F3F0c4F16E6f6e3e3b6Bf3c4d8b9c7f",
+          "role": "technical_validator",
+          "name": "IPFS Integrity Monitor",
+          "verified": true
+        }
+      ],
+      "signatureAlgorithm": "ECDSA-secp256k1",
+      "hashAlgorithm": "SHA3-256"
+    },
+    "councilGovernance": {
+      "enabled": true,
+      "quorumReporting": {
+        "enabled": true,
+        "automatedReporting": true,
+        "reportingFrequency": "weekly",
+        "minimumQuorum": 0.6,
+        "transparencyLevel": "full",
+        "publicDashboard": true,
+        "lastQuorumCheck": "2026-01-13T03:07:07Z",
+        "currentQuorumStatus": {
+          "totalMembers": 5,
+          "activeMembers": 5,
+          "quorumMet": true,
+          "participationRate": 1.0
+        }
+      },
+      "vetoMechanism": {
+        "enabled": true,
+        "vetoThreshold": 0.4,
+        "vetoPeriod": "P7D",
+        "requiresJustification": true,
+        "transparentVoting": true,
+        "vetoTypes": [
+          {
+            "type": "ethical_violation",
+            "weight": 1.0,
+            "description": "Veto based on violation of Lex Amoris principles"
+          },
+          {
+            "type": "technical_security",
+            "weight": 1.0,
+            "description": "Veto based on security or integrity concerns"
+          },
+          {
+            "type": "community_consensus",
+            "weight": 0.8,
+            "description": "Veto based on lack of community consensus"
+          },
+          {
+            "type": "bio_ethical_concern",
+            "weight": 1.0,
+            "description": "Veto based on bio-ethical considerations"
+          }
+        ]
+      },
+      "decisionMaking": {
+        "consensusModel": "qualified_majority",
+        "approvalThreshold": 0.67,
+        "discussionPeriod": "P14D",
+        "implementationDelay": "P7D",
+        "emergencyOverride": {
+          "enabled": true,
+          "requiresUnanimous": true,
+          "validReasons": ["security_breach", "ethical_violation", "system_failure"]
+        }
+      }
+    },
+    "protections": {
+      "nonSlaveryRule": {
+        "enforced": true,
+        "description": "Constitutional AI protection preventing exploitation",
+        "automaticBlocking": true
+      },
+      "bioEthicalAlignment": {
+        "enforced": true,
+        "mycelialConsensus": true,
+        "frequencyResonance": "0.0043Hz"
+      },
+      "dataPrivacy": {
+        "noSurveillance": true,
+        "noInvasiveMonitoring": true,
+        "userSovereignty": true
+      }
+    },
+    "integrationStatus": {
+      "connectedRepositories": 102,
+      "ipfsNodes": "all",
+      "nexusStatus": "active",
+      "sustainabilityIndex": 0.5192,
+      "energySource": "renewable",
+      "lastSync": "2026-01-13T03:07:07Z"
+    }
+  }
+}
