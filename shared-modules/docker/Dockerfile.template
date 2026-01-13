@@ -1,0 +1,72 @@
+# LexAmoris Ecosystem - Base Dockerfile Template
+# This Dockerfile can be customized per repository while maintaining common patterns
+
+ARG NODE_VERSION=18
+ARG PYTHON_VERSION=3.11
+
+# Multi-stage build for optimized image size
+FROM node:${NODE_VERSION}-alpine AS node-base
+
+# Install common system dependencies
+RUN apk add --no-cache \
+    git \
+    bash \
+    curl \
+    python3 \
+    py3-pip
+
+WORKDIR /app
+
+# Copy package files for dependency installation
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --only=production && \
+    npm cache clean --force
+
+# Python stage (if needed)
+FROM python:${PYTHON_VERSION}-alpine AS python-base
+
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt* ./
+RUN if [ -f requirements.txt ]; then \
+    pip install --no-cache-dir -r requirements.txt; \
+    fi
+
+# Final stage
+FROM alpine:latest
+
+# Install runtime dependencies
+RUN apk add --no-cache \
+    nodejs \
+    npm \
+    python3 \
+    bash
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S lexamoris && \
+    adduser -S -u 1001 -G lexamoris lexamoris
+
+WORKDIR /app
+
+# Copy artifacts from build stages
+COPY --from=node-base --chown=lexamoris:lexamoris /app/node_modules ./node_modules
+COPY --chown=lexamoris:lexamoris . .
+
+# Set user
+USER lexamoris
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD node healthcheck.js || exit 1
+
+# Default command (override in specific repositories)
+CMD ["node", "index.js"]
+
+# Labels for Lex Amoris ecosystem
+LABEL org.lexamoris.ecosystem="true"
+LABEL org.lexamoris.version="1.0"
+LABEL org.lexamoris.signature="Protection of the Law of Love active"
+LABEL maintainer="Hannes Mitterer"
