@@ -10,7 +10,7 @@ setup(
     install_requires=[
         "grpcio>=1.60.0",
         "grpcio-tools>=1.60.0",
-        "protobuf>=4.25.1",
+        "protobuf>=4.25.8",
         "websockets>=12.0",
     ],
     python_requires=">=3.8",
