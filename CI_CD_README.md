@@ -88,7 +88,7 @@ http://localhost:8080
 
 The CI/CD pipeline is designed with extensibility in mind for:
 
-1. **IPFS Integration**: Docker compose includes commented configuration for IPFS nodes
+1. **IPFS Integration**: Docker Compose includes commented configuration for IPFS nodes
 2. **Mycelium Bio-Synthetic Components**: Placeholder for air-gapped and distributed deployments
 3. **Advanced Testing**: Integration tests for bio-distributed systems
 4. **Security Scanning**: Automated vulnerability scanning
