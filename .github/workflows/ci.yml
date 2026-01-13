@@ -44,7 +44,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          if [ -f package.json ]; then npm ci; else npm install eslint --save-dev; fi
+          if [ -f package.json ]; then npm install; else npm install eslint --save-dev; fi
       
       - name: Lint with eslint
         run: |
@@ -90,7 +90,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          if [ -f package.json ]; then npm ci; else echo "No package.json found"; fi
+          if [ -f package.json ]; then npm install; else echo "No package.json found"; fi
       
       - name: Run tests
         run: |
