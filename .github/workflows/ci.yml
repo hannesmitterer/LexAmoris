@@ -44,11 +44,11 @@ jobs:
       
       - name: Install dependencies
         run: |
-          if [ -f package.json ]; then npm install; else npm install eslint --save-dev; fi
+          if [ -f package.json ]; then npm install; fi
       
       - name: Lint with eslint
         run: |
-          if [ -f package.json ]; then npm run lint || echo "No lint script found"; else echo "No package.json found, skipping JS linting"; fi
+          if [ -f package.json ]; then npm run lint || echo "No lint script found, skipping"; else echo "No package.json found, skipping JS linting"; fi
 
   test-python:
     name: Python Unit Tests
@@ -111,7 +111,7 @@ jobs:
           if [ -f Dockerfile ]; then
             docker build -t lexamoris:test .
           else
-            echo "No Dockerfile found, creating basic Dockerfile"
+            echo "No Dockerfile found, skipping Docker build"
           fi
       
       - name: Test Docker container
