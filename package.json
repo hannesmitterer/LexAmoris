@@ -1,0 +1,25 @@
+{
+  "name": "lexamoris",
+  "version": "1.0.0",
+  "description": "Lex Amoris - Transparent Sovereignty and Bio-Distributed Systems",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0",
+    "lint": "eslint . --ext .js || echo 'No JavaScript files to lint'",
+    "start": "python -m http.server 8000",
+    "docker:build": "docker build -t lexamoris .",
+    "docker:run": "docker run -p 8080:80 lexamoris"
+  },
+  "keywords": [
+    "bio-distributed",
+    "sovereignty",
+    "mycelium",
+    "ipfs",
+    "lex-amoris"
+  ],
+  "author": "Hannes Mitterer",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.50.0"
+  }
+}
