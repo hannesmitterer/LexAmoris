@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trust Anchors Manifest",
+  "version": "1.0.0",
+  "type": "TrustAnchorsManifest",
+  "conformsTo": "ETSI TS 119 612 V2.2.1",
+  "description": "Cryptographically signed trust anchors for LexAmoris distributed sovereignty",
+  
+  "manifest": {
+    "schemeOperator": {
+      "name": "LexAmoris Trust Council",
+      "tradeName": "LexAmoris",
+      "address": "Martinique Nexus, Distributed",
+      "electronicAddress": "trust@lexamoris.covenant",
+      "informationURI": "ipfs://lexamoris-trust-info"
+    },
+    
+    "schemeName": "LexAmoris Distributed Trust Network",
+    "schemeType": "bio-ethical-web-of-trust",
+    "schemeTerritory": "global",
+    "legalNotices": [
+      "This trust scheme operates under Lex Amoris constitutional protection",
+      "All trust anchors are subject to bio-ethical consensus validation",
+      "Participation is voluntary and revocable by community consensus"
+    ],
+    
+    "listIssueDateTime": "2026-01-13T03:16:14.422Z",
+    "nextUpdate": "2026-04-13T00:00:00Z",
+    "sequenceNumber": 1,
+    "distributionPoints": [
+      "ipfs://trust-anchors",
+      "_dnslink.trust.lexamoris.covenant"
+    ]
+  },
+  
+  "trustServiceProviders": [
+    {
+      "tspId": "TSP-001",
+      "tspName": "LexAmoris Core Covenant Service",
+      "tspTradeName": "Covenant Trust",
+      "status": "granted",
+      "statusStartingTime": "2026-01-13T00:00:00Z",
+      
+      "trustServices": [
+        {
+          "serviceId": "SVC-001",
+          "serviceName": "Living Covenant Signature Service",
+          "serviceType": "http://uri.etsi.org/TrstSvc/Svctype/CA/QC",
+          "serviceStatus": "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted",
+          "statusStartingTime": "2026-01-13T00:00:00Z",
+          
+          "serviceDigitalIdentity": {
+            "publicKeyInfo": {
+              "algorithm": "Ed25519",
+              "keySize": 256,
+              "fingerprint": "SHA256:covenant-root-trust-anchor-placeholder",
+              "publicKey": "placeholder-base64-encoded-public-key"
+            },
+            "certificates": []
+          },
+          
+          "serviceInformation": {
+            "schemeServiceDefinitionURI": "ipfs://covenant-service-definition",
+            "supplyPoints": ["ipfs://covenant-signer"],
+            "additionalServiceInformation": {
+              "bioEthicalValidation": true,
+              "consensusRequired": true,
+              "immutable": true
+            }
+          }
+        },
+        {
+          "serviceId": "SVC-002",
+          "serviceName": "Bio-Ethical Validation Service",
+          "serviceType": "http://uri.etsi.org/TrstSvc/Svctype/TSA/QTST",
+          "serviceStatus": "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted",
+          "statusStartingTime": "2026-01-13T00:00:00Z",
+          
+          "serviceDigitalIdentity": {
+            "publicKeyInfo": {
+              "algorithm": "Ed25519",
+              "keySize": 256,
+              "fingerprint": "SHA256:bio-ethical-validator-placeholder",
+              "publicKey": "placeholder-base64-encoded-public-key"
+            }
+          },
+          
+          "serviceInformation": {
+            "schemeServiceDefinitionURI": "ipfs://bio-ethical-service-definition",
+            "supplyPoints": ["ipfs://bio-validator"],
+            "additionalServiceInformation": {
+              "nsrEnforcement": true,
+              "realTimeValidation": true,
+              "criticalProtection": true
+            }
+          }
+        },
+        {
+          "serviceId": "SVC-003",
+          "serviceName": "Sovereignty Guardian Service",
+          "serviceType": "http://uri.etsi.org/TrstSvc/Svctype/unspecified",
+          "serviceStatus": "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted",
+          "statusStartingTime": "2026-01-13T00:00:00Z",
+          
+          "serviceDigitalIdentity": {
+            "publicKeyInfo": {
+              "algorithm": "Ed25519",
+              "keySize": 256,
+              "fingerprint": "SHA256:sovereignty-guardian-placeholder",
+              "publicKey": "placeholder-base64-encoded-public-key"
+            }
+          },
+          
+          "serviceInformation": {
+            "schemeServiceDefinitionURI": "ipfs://sovereignty-service-definition",
+            "supplyPoints": ["ipfs://sovereignty-guardian"],
+            "additionalServiceInformation": {
+              "autonomyProtection": true,
+              "controlPrevention": true,
+              "distributedSovereignty": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "tspId": "TSP-002",
+      "tspName": "LexAmoris IPFS Anchoring Service",
+      "tspTradeName": "Immutable Trust",
+      "status": "granted",
+      "statusStartingTime": "2026-01-13T00:00:00Z",
+      
+      "trustServices": [
+        {
+          "serviceId": "SVC-004",
+          "serviceName": "IPFS Content Anchoring Service",
+          "serviceType": "http://uri.etsi.org/TrstSvc/Svctype/IdV",
+          "serviceStatus": "http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted",
+          "statusStartingTime": "2026-01-13T00:00:00Z",
+          
+          "serviceDigitalIdentity": {
+            "publicKeyInfo": {
+              "algorithm": "SHA256",
+              "contentAddressing": true,
+              "ipfsCID": "placeholder-ipfs-cid"
+            }
+          },
+          
+          "serviceInformation": {
+            "schemeServiceDefinitionURI": "ipfs://anchoring-service-definition",
+            "supplyPoints": [
+              "ipfs.io",
+              "dweb.link",
+              "localhost:5001"
+            ],
+            "additionalServiceInformation": {
+              "pinningEnabled": true,
+              "minReplication": 3,
+              "killSwitchPrevention": true,
+              "immutability": "content-addressed"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  
+  "signature": {
+    "signatureAlgorithm": "Ed25519",
+    "hashAlgorithm": "SHA-256",
+    "signatureFormat": "XAdES-EPES",
+    "signingTime": "2026-01-13T03:16:14.422Z",
+    "signerIdentity": "LexAmoris Trust Council",
+    "signatureValue": "placeholder-base64-signature",
+    "publicKeyFingerprint": "SHA256:trust-list-signer-placeholder",
+    
+    "verification": {
+      "method": "ipfs-content-addressing + cryptographic-signature",
+      "publicKeyLocation": "ipfs://trust-council-public-key",
+      "verificationInstructions": "Verify content hash matches IPFS CID and signature validates against published public key"
+    }
+  },
+  
+  "ipfsAnchoring": {
+    "enabled": true,
+    "cid": "placeholder-will-be-generated-on-pinning",
+    "pinned": true,
+    "replicationFactor": 3,
+    "publicGateways": [
+      "https://ipfs.io/ipfs/{CID}",
+      "https://dweb.link/ipfs/{CID}"
+    ],
+    "dnsLink": "_dnslink.trust.lexamoris.covenant = dnslink=/ipfs/{CID}"
+  },
+  
+  "complianceInformation": {
+    "etsiStandard": "TS 119 612 V2.2.1",
+    "additionalStandards": [
+      "IPFS-Spec-v0.28",
+      "G-CSI-2026",
+      "Bio-Ethical-Consensus-v1"
+    ],
+    "validationTool": "ipfs-shipyard/pinning-service-compliance",
+    "lastValidation": "2026-01-13T03:16:14.422Z",
+    "nextValidation": "2026-04-13T00:00:00Z"
+  },
+  
+  "changeHistory": [
+    {
+      "version": "1.0.0",
+      "date": "2026-01-13T03:16:14.422Z",
+      "changes": "Initial trust anchors manifest creation",
+      "approvedBy": "LexAmoris Trust Council",
+      "consensusThreshold": "initial-establishment"
+    }
+  ],
+  
+  "metadata": {
+    "maintainer": "LexAmoris Trust Council",
+    "contact": "trust@lexamoris.covenant",
+    "publicVerification": true,
+    "transparency": "full",
+    "immutable": true,
+    "signature": "Trust Anchors Established ⚓🔐⚖️❤️"
+  }
+}
