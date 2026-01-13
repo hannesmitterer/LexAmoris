@@ -6,6 +6,11 @@
 
 set -e
 
+# Configuration Constants
+readonly MIN_IMMUTABLE_PRINCIPLES=3  # NSR, SOV, BIO (minimum critical protections)
+readonly MIN_REPLICATION_FACTOR=3    # Minimum IPFS pinning replicas for resilience
+readonly MIN_CRITICAL_ARTIFACTS=5    # living-covenant, trust-anchors, key-trust, compliance, nsr
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -149,12 +154,12 @@ verify_living_covenant() {
     
     # Check immutability
     if [ $HAS_JQ -eq 1 ]; then
-        print_test "All critical principles are immutable"
+        print_test "All critical principles are immutable (>= $MIN_IMMUTABLE_PRINCIPLES)"
         local immutable_count=$(jq '[.covenant.principles[] | select(.immutable == true)] | length' "$file")
-        if [ "$immutable_count" -ge 3 ]; then
+        if [ "$immutable_count" -ge "$MIN_IMMUTABLE_PRINCIPLES" ]; then
             print_pass
         else
-            print_fail "Only $immutable_count immutable principles found"
+            print_fail "Only $immutable_count immutable principles found, expected >= $MIN_IMMUTABLE_PRINCIPLES"
         fi
     fi
 }
@@ -173,21 +178,21 @@ verify_ipfs_anchoring() {
     
     # Check minimum replication
     if [ $HAS_JQ -eq 1 ]; then
-        print_test "Minimum replication >= 3"
+        print_test "Minimum replication >= $MIN_REPLICATION_FACTOR"
         local min_rep=$(jq -r '.ipfs.pinning.minReplication' "$file")
-        if [ "$min_rep" -ge 3 ]; then
+        if [ "$min_rep" -ge "$MIN_REPLICATION_FACTOR" ]; then
             print_pass
         else
-            print_fail "Minimum replication is $min_rep, should be >= 3"
+            print_fail "Minimum replication is $min_rep, should be >= $MIN_REPLICATION_FACTOR"
         fi
         
         # Check critical artifacts
-        print_test "All critical artifacts configured"
+        print_test "All critical artifacts configured (>= $MIN_CRITICAL_ARTIFACTS)"
         local critical_count=$(jq '[.anchoring.artifacts[] | select(.critical == true)] | length' "$file")
-        if [ "$critical_count" -ge 5 ]; then
+        if [ "$critical_count" -ge "$MIN_CRITICAL_ARTIFACTS" ]; then
             print_pass
         else
-            print_fail "Only $critical_count critical artifacts found, expected >= 5"
+            print_fail "Only $critical_count critical artifacts found, expected >= $MIN_CRITICAL_ARTIFACTS"
         fi
     fi
 }
