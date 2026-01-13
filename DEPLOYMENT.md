@@ -118,7 +118,6 @@ The deployment configuration includes security headers:
 
 - `X-Frame-Options`: SAMEORIGIN (prevents clickjacking)
 - `X-Content-Type-Options`: nosniff (prevents MIME-type sniffing)
-- `X-XSS-Protection`: 1; mode=block (XSS protection)
 - Automatic HTTPS on supported platforms
 
 ## Performance Optimization
@@ -208,9 +207,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install HTML validator
+        run: npm install -g html-validator-cli
       - name: Validate HTML
-        run: |
-          curl -sSL https://validator.github.io/validator/ | bash -s index.html
+        run: html-validator --file=index.html --verbose
 ```
 
 ## Support

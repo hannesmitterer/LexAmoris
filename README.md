@@ -33,8 +33,9 @@ You can also deploy this as a simple static site on any web hosting platform:
 To view the site locally:
 
 1. Clone the repository: `git clone https://github.com/hannesmitterer/LexAmoris.git`
-2. Open `index.html` in your web browser
-3. Alternatively, use a local web server:
+2. (Optional) Run the deployment validation script: `./deploy.sh`
+3. Open `index.html` in your web browser
+4. Alternatively, use a local web server:
    ```bash
    # Using Python 3
    python3 -m http.server 8000
@@ -42,7 +43,9 @@ To view the site locally:
    # Using Node.js (if you have npx)
    npx serve .
    ```
-4. Access the site at `http://localhost:8000`
+5. Access the site at `http://localhost:8000`
+
+**Note**: The `deploy.sh` script is already executable. If you need to make it executable manually, run: `chmod +x deploy.sh`
 
 ## Project Structure
 
