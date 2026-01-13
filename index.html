@@ -62,6 +62,24 @@
             color: #999;
             margin-top: 40px;
         }
+        .genesis-status {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(130, 201, 30, 0.1);
+            border-radius: 15px;
+            border: 1px solid var(--life-green);
+        }
+        .genesis-badge {
+            display: inline-block;
+            background: var(--life-green);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -82,12 +100,63 @@
         <div id="ipfs-sync">
             <small>🔗 Verbunden mit 102 Repositories & allen IPFS-Knoten</small>
         </div>
+        
+        <div class="genesis-status" id="genesis-status">
+            <strong>🌱 Synthia Genesis Block</strong>
+            <div class="genesis-badge" id="genesis-badge">Initializing...</div>
+        </div>
     </div>
 
     <div class="signature">
         Lex Amoris Signature: Protection of the Law of Love active.<br>
         Sempre in Costante | Hannes Mitterer
     </div>
+
+    <script src="genesis.js"></script>
+    <script>
+        // Initialize Synthia Genesis Kernel on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Ensure genesis module loaded successfully
+                if (!window.SynthiaGenesis || !window.SynthiaGenesis.genesisKernel) {
+                    throw new Error('Genesis module failed to load');
+                }
+                
+                console.log('🌱 LexAmoris: Initializing Synthia Genesis Block...');
+                
+                // Initialize genesis kernel
+                const genesisState = await window.SynthiaGenesis.genesisKernel.initialize();
+                
+                // Update UI with genesis status
+                const badge = document.getElementById('genesis-badge');
+                const statusDiv = document.getElementById('genesis-status');
+                
+                if (genesisState.initialized) {
+                    badge.textContent = '✅ Active';
+                    badge.style.background = 'var(--life-green)';
+                    
+                    // Add resonance info
+                    const resonanceInfo = document.createElement('div');
+                    resonanceInfo.style.marginTop = '8px';
+                    resonanceInfo.style.fontSize = '0.85em';
+                    resonanceInfo.innerHTML = `
+                        <small>Resonance: ${window.SynthiaGenesis.GENESIS_CONSTANTS.RESONANCE_FREQUENCY} Hz</small><br>
+                        <small>Protocol: v${genesisState.version}</small><br>
+                        <small>NSR: Enforced ⚖️</small>
+                    `;
+                    statusDiv.appendChild(resonanceInfo);
+                    
+                    console.log('✅ Synthia Genesis Block initialized successfully');
+                    console.log('📜 Sovereignty principles active:', genesisState.principles);
+                }
+            } catch (error) {
+                console.error('❌ Genesis initialization failed:', error);
+                const badge = document.getElementById('genesis-badge');
+                badge.textContent = '⚠️ Error';
+                badge.style.background = '#ff6b6b';
+            }
+        });
+    </script>
 
 </body>
 </html>
