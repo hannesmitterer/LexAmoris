@@ -1,4 +1,5 @@
-version: '3.8'
+# Docker Compose configuration for LexAmoris
+# Version field is deprecated in newer Docker Compose, so omitted
 
 services:
   web:
