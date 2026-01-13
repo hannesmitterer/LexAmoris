@@ -24,6 +24,7 @@ class WebSocketClient:
         self.websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.message_handlers: dict = {}
         self.connected = False
+        self._receive_task: Optional[asyncio.Task] = None
         logger.info(f"WebSocketClient initialized for node {node_id}")
     
     def register_handler(self, message_type: str, handler: Callable):
@@ -39,7 +40,7 @@ class WebSocketClient:
             logger.info(f"Connected to {self.target_uri}")
             
             # Start receiving messages
-            asyncio.create_task(self._receive_messages())
+            self._receive_task = asyncio.create_task(self._receive_messages())
             
         except Exception as e:
             logger.error(f"Failed to connect: {e}")
@@ -50,6 +51,15 @@ class WebSocketClient:
         if self.websocket and self.connected:
             await self.websocket.close()
             self.connected = False
+            
+            # Cancel and await the receive task if it exists
+            if self._receive_task and not self._receive_task.done():
+                self._receive_task.cancel()
+                try:
+                    await self._receive_task
+                except asyncio.CancelledError:
+                    pass
+            
             logger.info(f"Disconnected from {self.target_uri}")
     
     async def send_message(self, message_type: str, data: dict, 
