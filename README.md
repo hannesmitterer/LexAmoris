@@ -15,7 +15,7 @@ This project is configured for deployment on [Render.com](https://render.com) as
 2. Render will automatically detect the `render.yaml` configuration
 3. The site will be deployed with the following features:
    - Static file serving from the root directory
-   - Security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection)
+   - Security headers (X-Frame-Options, X-Content-Type-Options)
    - Caching configuration for optimal performance
    - Automatic HTTPS
 
