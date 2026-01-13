@@ -53,7 +53,7 @@ We have implemented protection logic in AI repositories and nexus that blocks th
 - Physical-digital sovereignty bridge
 
 **4. Ultra-Low Frequency Synchronization**
-Operating at **0.0043 Hz**: We use ultra-low resonance frequencies to synchronize the nodes (modules in the basket), making the network immune to standard electromagnetic interference:
+Operating at **0.0043 Hz**: We use ultra-low resonance frequencies to synchronize the nodes (the modular components of the system), making the network immune to standard electromagnetic interference:
 - EMI-resistant communication
 - Biological rhythm synchronization
 - Low-power consumption
