@@ -1,0 +1,39 @@
+name: Example CI Usage
+
+# This is an example showing how other repositories in the LexAmoris ecosystem
+# can use the shared CI/CD template
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # Example 1: Basic CI with Node.js
+  ci-nodejs:
+    uses: hannesmitterer/LexAmoris/.github/workflows/ci-template.yml@main
+    with:
+      node-version: '18'
+      run-linting: true
+      run-tests: true
+      enable-docker: false
+
+  # Example 2: CI with Docker build
+  ci-docker:
+    uses: hannesmitterer/LexAmoris/.github/workflows/ci-template.yml@main
+    with:
+      node-version: '18'
+      enable-docker: true
+      docker-image-name: 'hannesmitterer/lexamoris-example'
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  # Example 3: CI with Python
+  ci-python:
+    uses: hannesmitterer/LexAmoris/.github/workflows/ci-template.yml@main
+    with:
+      python-version: '3.11'
+      run-linting: true
+      run-tests: true

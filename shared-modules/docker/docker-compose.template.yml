@@ -1,0 +1,55 @@
+# LexAmoris Ecosystem - Docker Compose Template
+# Use this template for local development and testing
+
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION:-18}
+        PYTHON_VERSION: ${PYTHON_VERSION:-3.11}
+    container_name: lexamoris-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-3000}
+      # Add your environment variables here
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    volumes:
+      # Mount source code in development
+      - .:/app
+      - /app/node_modules
+    networks:
+      - lexamoris-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-3000}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "org.lexamoris.ecosystem=true"
+      - "org.lexamoris.component=app"
+
+  # Optional: Add database, cache, or other services
+  # redis:
+  #   image: redis:alpine
+  #   container_name: lexamoris-redis
+  #   restart: unless-stopped
+  #   networks:
+  #     - lexamoris-network
+
+networks:
+  lexamoris-network:
+    driver: bridge
+    labels:
+      - "org.lexamoris.ecosystem=true"
+
+volumes:
+  app-data:
+    labels:
+      - "org.lexamoris.ecosystem=true"
