@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package lexamoris.internodal;
+
+// Service for internodal communication
+service InternodeService {
+  // Send event stream from one node to another
+  rpc StreamEvents(stream EventMessage) returns (stream EventResponse);
+  
+  // Send data from one node to another
+  rpc SendData(DataMessage) returns (DataResponse);
+  
+  // Health check for node connectivity
+  rpc HealthCheck(HealthRequest) returns (HealthResponse);
+}
+
+// Event message for streaming between nodes
+message EventMessage {
+  string source_node = 1;
+  string target_node = 2;
+  string event_type = 3;
+  bytes payload = 4;
+  int64 timestamp = 5;
+  map<string, string> metadata = 6;
+}
+
+// Response to event stream
+message EventResponse {
+  bool success = 1;
+  string message = 2;
+  int64 timestamp = 3;
+}
+
+// Data message for node-to-node communication
+message DataMessage {
+  string source_node = 1;
+  string target_node = 2;
+  string data_type = 3;
+  bytes data = 4;
+  int64 timestamp = 5;
+  map<string, string> metadata = 6;
+}
+
+// Response to data message
+message DataResponse {
+  bool success = 1;
+  string message = 2;
+  string response_id = 3;
+  int64 timestamp = 4;
+}
+
+// Health check request
+message HealthRequest {
+  string node_id = 1;
+}
+
+// Health check response
+message HealthResponse {
+  bool healthy = 1;
+  string node_id = 2;
+  string status = 3;
+  int64 uptime = 4;
+}
