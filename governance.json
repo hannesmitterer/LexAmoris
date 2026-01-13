@@ -29,10 +29,11 @@
     "keyTrustProtocol": {
       "enabled": true,
       "version": "1.0.0",
+      "_note": "Public keys are Ethereum addresses (20 bytes) derived from ECDSA-secp256k1 public keys for compatibility with Ethereum-based verification",
       "gCSIRequirements": {
         "cryptographicAlignment": true,
         "minimumTrustLevel": "high",
-        "keyRotationPeriod": "365d",
+        "keyRotationPeriod": "P365D",
         "multiSigThreshold": 3,
         "minimumSigners": 5
       },
@@ -91,7 +92,7 @@
       "vetoMechanism": {
         "enabled": true,
         "vetoThreshold": 0.4,
-        "vetoPeriod": "7d",
+        "vetoPeriod": "P7D",
         "requiresJustification": true,
         "transparentVoting": true,
         "vetoTypes": [
@@ -120,8 +121,8 @@
       "decisionMaking": {
         "consensusModel": "qualified_majority",
         "approvalThreshold": 0.67,
-        "discussionPeriod": "14d",
-        "implementationDelay": "7d",
+        "discussionPeriod": "P14D",
+        "implementationDelay": "P7D",
         "emergencyOverride": {
           "enabled": true,
           "requiresUnanimous": true,
