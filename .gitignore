@@ -1,0 +1,28 @@
+# Build artifacts
+node_modules/
+dist/
+build/
+*.log
+
+# Temporary files
+/tmp/
+*.tmp
+*.temp
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Generated files
+*.ipfs
+*.cid
+
+# System files
+Thumbs.db

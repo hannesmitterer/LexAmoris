@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IPFS Anchoring Configuration",
+  "version": "1.0.0",
+  "type": "IPFSAnchoringConfig",
+  "description": "Immutable anchoring configuration for LexAmoris ecosystem using IPFS",
+  
+  "ipfs": {
+    "enabled": true,
+    "version": "0.28.0",
+    "gateway": "https://ipfs.io",
+    "api": "/api/v0",
+    
+    "nodes": [
+      {
+        "id": "primary",
+        "endpoint": "ipfs.io",
+        "protocol": "https",
+        "role": "public-gateway"
+      },
+      {
+        "id": "backup-1",
+        "endpoint": "dweb.link",
+        "protocol": "https",
+        "role": "backup-gateway"
+      },
+      {
+        "id": "local",
+        "endpoint": "localhost:5001",
+        "protocol": "http",
+        "role": "development"
+      }
+    ],
+    
+    "pinning": {
+      "enabled": true,
+      "services": [
+        {
+          "name": "Pinata",
+          "endpoint": "https://api.pinata.cloud",
+          "priority": 1
+        },
+        {
+          "name": "web3.storage",
+          "endpoint": "https://api.web3.storage",
+          "priority": 2
+        },
+        {
+          "name": "NFT.Storage",
+          "endpoint": "https://api.nft.storage",
+          "priority": 3
+        }
+      ],
+      "minReplication": 3,
+      "autoPin": true
+    }
+  },
+  
+  "anchoring": {
+    "strategy": "content-addressed-immutable",
+    "hashAlgorithm": "sha256",
+    "encoding": "base58btc",
+    
+    "artifacts": [
+      {
+        "type": "living-covenant",
+        "path": "/living-covenant.json",
+        "pinned": true,
+        "public": true,
+        "critical": true
+      },
+      {
+        "type": "trust-anchors",
+        "path": "/trust-anchors.json",
+        "pinned": true,
+        "public": true,
+        "critical": true
+      },
+      {
+        "type": "key-trust-protocol",
+        "path": "/key-trust-protocol.json",
+        "pinned": true,
+        "public": true,
+        "critical": true
+      },
+      {
+        "type": "compliance-manifest",
+        "path": "/g-csi-compliance.json",
+        "pinned": true,
+        "public": true,
+        "critical": true
+      },
+      {
+        "type": "nsr-rules",
+        "path": "/nsr-enforcement.json",
+        "pinned": true,
+        "public": true,
+        "critical": true
+      }
+    ],
+    
+    "updatePolicy": {
+      "mechanism": "new-hash-publication",
+      "versioning": true,
+      "previousVersionRetention": true,
+      "updateNotification": true
+    }
+  },
+  
+  "verification": {
+    "enabled": true,
+    "methods": [
+      "content-hash-validation",
+      "digital-signature",
+      "distributed-consensus"
+    ],
+    
+    "integrity": {
+      "checksumValidation": true,
+      "signatureRequired": true,
+      "consensusThreshold": 0.67
+    }
+  },
+  
+  "distribution": {
+    "protocol": "ipfs",
+    "dnsLink": true,
+    "dnsRecords": {
+      "_dnslink.lexamoris.covenant": "dnslink=/ipfs/{CID}",
+      "_dnslink.trust.lexamoris.covenant": "dnslink=/ipfs/{CID}"
+    },
+    
+    "accessibility": {
+      "publicGateways": true,
+      "privatePeers": false,
+      "globalReachability": true
+    }
+  },
+  
+  "security": {
+    "encryption": false,
+    "publicVisibility": true,
+    "tamperResistance": "content-addressing",
+    "killSwitchPrevention": true,
+    
+    "protections": [
+      {
+        "type": "immutability",
+        "mechanism": "content-addressed-storage",
+        "description": "Content cannot be modified without changing its address"
+      },
+      {
+        "type": "redundancy",
+        "mechanism": "distributed-pinning",
+        "description": "Multiple independent nodes maintain copies"
+      },
+      {
+        "type": "transparency",
+        "mechanism": "public-verification",
+        "description": "Anyone can verify content integrity"
+      }
+    ]
+  },
+  
+  "monitoring": {
+    "enabled": true,
+    "checkInterval": 3600,
+    "alerts": {
+      "unpinnedContent": true,
+      "unavailableNodes": true,
+      "integrityFailure": true
+    },
+    
+    "metrics": [
+      "pin-count",
+      "replication-factor",
+      "availability-percentage",
+      "verification-success-rate"
+    ]
+  },
+  
+  "compliance": {
+    "standards": [
+      "IPFS-Spec-v0.28",
+      "Content-Addressing-v1",
+      "Pinning-Service-API-v1.0.0"
+    ],
+    "testing": {
+      "complianceTool": "ipfs-shipyard/pinning-service-compliance",
+      "frequency": "per-deployment"
+    }
+  },
+  
+  "metadata": {
+    "maintainer": "LexAmoris Core Team",
+    "status": "active",
+    "lastUpdated": "2026-01-13T03:16:14.422Z",
+    "purpose": "Ensure unstoppable, immutable, and transparent artifact distribution"
+  }
+}
